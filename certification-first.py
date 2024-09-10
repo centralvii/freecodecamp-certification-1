@@ -1,4 +1,4 @@
-def arithmetic_arranger(problems, show_answers=False):
+def arithmetic_arranger(problems, show_answers=True):
     if len(problems) > 5:
         return "Error: Too many problems."
 
@@ -7,8 +7,8 @@ def arithmetic_arranger(problems, show_answers=False):
     for value in problems:
         operation = value.split(" ")
 
-        if operation[1] not in ('-+'):
-            return "Error: Operator must be '+' or '-'."
+        if operation[1] not in ('-+*:'):
+            return "Error: Operator must be '+','-','*' or ':'."
 
         if len(operation[0]) > 4 or len(operation[2]) > 4:
             return 'Error: Numbers cannot be more than four digits.'
@@ -42,6 +42,10 @@ def arithmetic_arranger(problems, show_answers=False):
         if show_answers:
             if operation[1] == '+':
                 ans = int(operation[0]) + int(operation[2])
+            elif operation[1] == '*':
+                ans=int(operation[0]) * int(operation[2])
+            elif operation[1] == ':':
+                ans=int(operation[0]) / int(operation[2])
             else:
                 ans = int(operation[0]) - int(operation[2])
             answer = f"{str(ans):>{width}}"
@@ -57,4 +61,4 @@ def arithmetic_arranger(problems, show_answers=False):
     return output
 
 
-print(f'\n{arithmetic_arranger(["32 + 698", "3801 - 2", "45 + 43", "123 + 49"])}')
+print(f'\n{arithmetic_arranger(["25 : 5", "3801 * 2", "45 + 43", "123 + 49"])}')
